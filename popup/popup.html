@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Simplifier</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h1>Site Simplifier</h1>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Global Toggle -->
+      <div class="control-group">
+        <div class="control-row">
+          <span class="control-label">Extension Enabled</span>
+          <label class="toggle">
+            <input type="checkbox" id="globalToggle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <p class="control-description">Master switch for all sites</p>
+      </div>
+
+      <!-- Site-specific Toggle -->
+      <div class="control-group">
+        <div class="control-row">
+          <span class="control-label">Enable for this site</span>
+          <label class="toggle">
+            <input type="checkbox" id="siteToggle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <p class="control-description site-domain" id="currentDomain">-</p>
+      </div>
+
+      <!-- Simplification Level -->
+      <div class="control-group">
+        <label class="control-label">Simplification Level</label>
+        <div class="level-selector">
+          <button class="level-btn" data-level="light" title="Light - Subtle cleanup">
+            <span class="level-icon">&#9675;</span>
+            <span class="level-text">Light</span>
+          </button>
+          <button class="level-btn active" data-level="balanced" title="Balanced - Recommended">
+            <span class="level-icon">&#9681;</span>
+            <span class="level-text">Balanced</span>
+          </button>
+          <button class="level-btn" data-level="aggressive" title="Aggressive - Maximum cleanup">
+            <span class="level-icon">&#9679;</span>
+            <span class="level-text">Aggressive</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button id="simplifyBtn" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          Simplify Now
+        </button>
+        <button id="resetBtn" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+          </svg>
+          Reset Page
+        </button>
+      </div>
+
+      <!-- Status -->
+      <div class="status" id="status">
+        <span class="status-dot"></span>
+        <span class="status-text">Ready</span>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>v1.0.0 - Make the web calmer</p>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

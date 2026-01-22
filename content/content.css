@@ -1,0 +1,54 @@
+/* Site Simplifier - Base Content Styles */
+/* These styles are injected on all pages but only activate when simplification is enabled */
+
+/* Animation for smooth transitions */
+.site-simplifier-active * {
+  transition: opacity 0.3s ease, filter 0.3s ease !important;
+}
+
+/* Ensure hidden elements are truly hidden */
+.site-simplifier-hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* De-emphasized elements fade to background */
+.site-simplifier-deemphasized {
+  opacity: 0.25 !important;
+  filter: grayscale(50%) blur(0.5px) !important;
+  transition: opacity 0.3s ease, filter 0.3s ease !important;
+}
+
+.site-simplifier-deemphasized:hover,
+.site-simplifier-deemphasized:focus-within {
+  opacity: 0.9 !important;
+  filter: grayscale(0%) blur(0px) !important;
+}
+
+/* Unstick sticky elements */
+.site-simplifier-unstuck {
+  position: relative !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  z-index: auto !important;
+}
+
+/* Main content enhancement */
+.site-simplifier-main-content {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Simplified navigation */
+.site-simplifier-nav-simplified {
+  position: relative !important;
+}
