@@ -60,7 +60,12 @@
       '[id*="taboola"]', '[class*="taboola"]', '.trc_related_container',
       // Outbrain
       '[id*="outbrain"]', '[class*="outbrain"]', '.OUTBRAIN',
-      // Yahoo specific
+      // Other networks
+      '[id*="amazon-ad"]', '[class*="amazon-ad"]',
+      '[class*="criteo"]', '[id*="criteo"]',
+      '[class*="prebid"]',
+
+      // === YAHOO FINANCE SPECIFIC ===
       '[class*="gemini-ad"]', '[data-beacon]',
       '[class*="caas-da"]', '[class*="caas-ad"]',
       '[class*="ad-slot"]', '[class*="adSlot"]',
@@ -69,10 +74,26 @@
       '[class*="video-ad"]', '[class*="videoAd"]',
       '[class*="preroll"]', '[class*="midroll"]',
       '[class*="YDC-"]',
-      // Other networks
-      '[id*="amazon-ad"]', '[class*="amazon-ad"]',
-      '[class*="criteo"]', '[id*="criteo"]',
-      '[class*="prebid"]',
+      // Yahoo specific modules and widgets
+      '[data-ylk*="itc:0"]', // tracking elements
+      '[class*="trending"]', '[class*="Trending"]',
+      '[class*="markets-"]', '[class*="market-summary"]',
+      '[class*="ticker-"]', '[class*="quote-"]',
+      '[class*="stream-item"]',
+      '[class*="related-list"]', '[class*="RelatedList"]',
+      '[class*="latest-news"]', '[class*="LatestNews"]',
+      '[class*="aside-"]', '[class*="Aside"]',
+      '[class*="right-rail"]', '[class*="RightRail"]',
+      '[class*="rail-"]', '[class*="Rail-"]',
+      '[class*="sidebar"]', '[class*="Sidebar"]',
+      '[class*="Mstrm"]', // Yahoo stream modules
+      '[class*="tdv2"]', // Yahoo ticker data
+      '[class*="Pos(r)"]', // Yahoo positioning utilities that often wrap clutter
+      '[class*="multiple-stories"]',
+      '[class*="readmore"]', '[class*="read-more"]',
+      '[class*="Also"]', '[class*="also-"]',
+      '[class*="recirc"]', '[class*="Recirc"]',
+      'aside',
 
       // === AD IFRAMES ===
       'iframe[id*="ad"]', 'iframe[class*="ad"]',
@@ -89,9 +110,10 @@
       '[class*="paywall"]', '[class*="regwall"]',
 
       // === SOCIAL WIDGETS ===
-      '[class*="share-buttons"]', '[class*="social-share"]',
+      '[class*="share-buttons"]', '[class*="social-share"]', '[class*="SocialShare"]',
       '[class*="follow-us"]', '[class*="social-widget"]',
-      '[class*="social-bar"]', '[class*="share-bar"]',
+      '[class*="social-bar"]', '[class*="share-bar"]', '[class*="ShareBar"]',
+      '[class*="sharing"]', '[class*="Sharing"]',
 
       // === FLOATING / STICKY CLUTTER ===
       '[class*="floating-"]', '[class*="fixed-bottom"]',
@@ -111,24 +133,32 @@
       '[class*="top-banner"]', '[class*="promo-banner"]',
       '[class*="marketing-banner"]',
 
-      // === RIGHT RAIL / SIDEBARS (often ads) ===
-      '[class*="right-rail"]', '[class*="rightRail"]',
-      '[class*="rail-module"]',
+      // === SECONDARY CONTENT (hide instead of fade) ===
+      '[role="complementary"]',
+      '[class*="related-"]', '[class*="Related"]',
+      '[class*="recommended"]', '[class*="Recommended"]',
+      '[class*="popular-"]', '[class*="Popular"]',
+      '[class*="comments"]', '[id*="comments"]', '[class*="Comments"]',
+      '[class*="author-bio"]', '[class*="author-box"]', '[class*="AuthorBio"]',
+      '[class*="byline-"]',
 
       // === "RELATED" / "RECOMMENDED" (often native ads) ===
       '[class*="around-the-web"]', '[class*="from-the-web"]',
       '[class*="you-may-like"]', '[class*="recommended-for-you"]',
-      '[class*="more-stories"]', '[class*="related-stories"]'
+      '[class*="more-stories"]', '[class*="related-stories"]',
+      '[class*="more-from"]', '[class*="MoreFrom"]',
+      '[class*="also-read"]', '[class*="AlsoRead"]',
+
+      // === FOOTER ===
+      'footer', '[class*="footer"]', '[id*="footer"]',
+      '[class*="Footer"]', '[role="contentinfo"]'
     ],
 
-    // Elements to de-emphasize (fade out)
+    // Elements to de-emphasize (fade out) - only for light mode
+    // Most clutter is now hidden in balanced/aggressive modes
     deemphasizeSelectors: [
-      'aside', '[role="complementary"]',
-      '[class*="sidebar"]', '[id*="sidebar"]',
-      '[class*="related-"]', '[class*="recommended"]',
-      '[class*="trending"]', '[class*="popular-"]',
-      '[class*="comments"]', '[id*="comments"]',
-      '[class*="author-bio"]', '[class*="author-box"]'
+      // Header (keep visible but subtle)
+      'header:not(:first-of-type)'
     ],
 
     // Navigation elements to simplify
