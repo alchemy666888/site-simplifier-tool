@@ -94,6 +94,23 @@
       '[class*="Also"]', '[class*="also-"]',
       '[class*="recirc"]', '[class*="Recirc"]',
       'aside',
+      // Quote lookup and market data widgets
+      '[class*="quote-lookup"]', '[class*="QuoteLookup"]', '[class*="quoteLookup"]',
+      '[id*="quote-lookup"]', '[id*="QuoteLookup"]',
+      '[class*="lookup"]', '[id*="lookup"]',
+      '[class*="market-data"]', '[class*="MarketData"]',
+      '[class*="marketData"]', '[class*="market-overview"]',
+      '[class*="stock-"]', '[class*="Stock"]',
+      '[class*="watchlist"]', '[class*="Watchlist"]',
+      '[class*="portfolio"]', '[class*="Portfolio"]',
+      '[class*="screener"]', '[class*="Screener"]',
+      '[class*="cryptocurrencies"]', '[class*="Crypto"]',
+      // Yahoo layout columns (right column)
+      '[class*="W(320px)"]', '[class*="W(300px)"]', // Yahoo atomic CSS for sidebar widths
+      '[class*="Mend"]', // Yahoo margin end utilities
+      '[class*="Pend"]', // Yahoo padding end utilities
+      '[data-test-locator*="aside"]',
+      '[data-test-locator*="rail"]',
 
       // === AD IFRAMES ===
       'iframe[id*="ad"]', 'iframe[class*="ad"]',
@@ -122,10 +139,18 @@
       '[class*="adhesion"]', '[class*="anchor-ad"]',
 
       // === CHAT WIDGETS ===
-      '[class*="chat-widget"]', '[class*="livechat"]',
+      '[class*="chat-widget"]', '[class*="livechat"]', '[class*="live-chat"]',
       '[id*="intercom"]', '[class*="intercom"]',
       '[id*="drift"]', '[class*="helpscout"]',
       '[class*="zendesk"]', '[id*="hubspot"]',
+      '[class*="chatbot"]', '[class*="chat-bot"]', '[class*="ChatBot"]',
+      '[class*="messenger"]', '[class*="Messenger"]',
+      '[id*="chat"]', '[class*="chat-container"]',
+      '[class*="celcom"]', '[class*="digi"]', // celcomdigi
+      '[class*="crisp"]', '[class*="tawk"]', '[class*="olark"]',
+      '[class*="freshchat"]', '[class*="liveperson"]',
+      'iframe[src*="chat"]', 'iframe[title*="chat"]',
+      '[aria-label*="chat"]', '[aria-label*="Chat"]',
 
       // === NOTIFICATIONS / PROMOS ===
       '[class*="notification-bar"]', '[class*="alert-bar"]',
@@ -413,12 +438,78 @@
             max-width: 100% !important;
             overflow-x: hidden !important;
           }
+
+          /* === YAHOO FINANCE SPECIFIC LAYOUT === */
+          /* Hide right column/sidebar completely */
+          .site-simplifier-active [class*="rightColumn"],
+          .site-simplifier-active [class*="right-column"],
+          .site-simplifier-active [class*="RightColumn"],
+          .site-simplifier-active [data-test-locator*="SIDEBAR"],
+          .site-simplifier-active [class*="aside"],
+          .site-simplifier-active [class*="Aside"] {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+          }
+
+          /* Expand main column to full width */
+          .site-simplifier-active [class*="mainColumn"],
+          .site-simplifier-active [class*="main-column"],
+          .site-simplifier-active [class*="MainColumn"],
+          .site-simplifier-active [class*="leftColumn"],
+          .site-simplifier-active [class*="left-column"],
+          .site-simplifier-active [class*="LeftColumn"],
+          .site-simplifier-active [class*="article-wrap"],
+          .site-simplifier-active [class*="articleWrap"],
+          .site-simplifier-active [class*="caas-body"],
+          .site-simplifier-active [class*="caas-content"] {
+            width: 80% !important;
+            max-width: 80% !important;
+            min-width: 80% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            flex: none !important;
+          }
+
+          /* Override Yahoo's atomic CSS width classes */
+          .site-simplifier-active [class*="W(100%)"],
+          .site-simplifier-active [class*="W("] {
+            width: 80% !important;
+            max-width: 80% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+
+          /* Remove flex layout constraints */
+          .site-simplifier-active [class*="D(f)"],
+          .site-simplifier-active [class*="Flx"] {
+            flex-wrap: wrap !important;
+          }
+
+          /* Hide all fixed/sticky positioned elements except main nav */
+          .site-simplifier-active [style*="position: fixed"]:not(nav):not(header):not([class*="nav"]),
+          .site-simplifier-active [style*="position:fixed"]:not(nav):not(header):not([class*="nav"]) {
+            display: none !important;
+          }
         ` : ''}
 
-        /* Hidden elements */
+        /* Hidden elements - completely collapse and take no space */
         .site-simplifier-hidden {
           display: none !important;
           visibility: hidden !important;
+          opacity: 0 !important;
+          height: 0 !important;
+          max-height: 0 !important;
+          min-height: 0 !important;
+          width: 0 !important;
+          max-width: 0 !important;
+          min-width: 0 !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          border: none !important;
+          overflow: hidden !important;
+          position: absolute !important;
+          pointer-events: none !important;
         }
 
         /* De-emphasized elements */
