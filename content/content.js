@@ -40,37 +40,85 @@
   const SELECTORS = {
     // Elements to completely hide
     hideSelectors: [
-      // Ads and promotions
+      // === GENERIC AD SELECTORS ===
       '[class*="ad-"]', '[class*="ads-"]', '[id*="ad-"]', '[id*="ads-"]',
       '[class*="advert"]', '[id*="advert"]',
       '[class*="sponsor"]', '[id*="sponsor"]',
       '[class*="promoted"]', '[class*="promotion"]',
-      '[data-ad]', '[data-ads]', '[data-ad-unit]',
-      'ins.adsbygoogle', '[id*="google_ads"]',
+      '[data-ad]', '[data-ads]', '[data-ad-unit]', '[data-ad-slot]',
+      '[data-advertisement]', '[data-adservice]',
+      '[aria-label*="advertisement"]', '[aria-label*="Advertisement"]',
 
-      // Popups and modals
-      '[class*="popup"]', '[class*="modal"]:not([class*="bootstrap"])',
-      '[class*="overlay"]:not([class*="video"])',
+      // === GOOGLE ADS ===
+      'ins.adsbygoogle', '[id*="google_ads"]', '[id*="googleAds"]',
+      '[class*="google-ad"]', '[class*="googleAd"]',
+      'iframe[src*="doubleclick"]', 'iframe[src*="googlesyndication"]',
+      '[id*="div-gpt-ad"]', '[class*="gpt-ad"]',
+
+      // === COMMON AD NETWORKS ===
+      // Taboola
+      '[id*="taboola"]', '[class*="taboola"]', '.trc_related_container',
+      // Outbrain
+      '[id*="outbrain"]', '[class*="outbrain"]', '.OUTBRAIN',
+      // Yahoo specific
+      '[class*="gemini-ad"]', '[data-beacon]',
+      '[class*="caas-da"]', '[class*="caas-ad"]',
+      '[class*="ad-slot"]', '[class*="adSlot"]',
+      '[class*="stream-ad"]', '[class*="streamAd"]',
+      '[class*="ntk-ad"]', '[class*="Adsense"]',
+      '[class*="video-ad"]', '[class*="videoAd"]',
+      '[class*="preroll"]', '[class*="midroll"]',
+      '[class*="YDC-"]',
+      // Other networks
+      '[id*="amazon-ad"]', '[class*="amazon-ad"]',
+      '[class*="criteo"]', '[id*="criteo"]',
+      '[class*="prebid"]',
+
+      // === AD IFRAMES ===
+      'iframe[id*="ad"]', 'iframe[class*="ad"]',
+      'iframe[src*="ad"]', 'iframe[name*="ad"]',
+      'iframe[src*="banner"]',
+
+      // === POPUPS AND MODALS ===
+      '[class*="popup"]', '[class*="modal"]:not([class*="bootstrap"]):not([class*="video"])',
+      '[class*="overlay"]:not([class*="video"]):not([class*="player"])',
       '[class*="newsletter"]', '[class*="subscribe-modal"]',
       '[class*="cookie-banner"]', '[class*="cookie-notice"]', '[class*="cookie-consent"]',
       '[class*="gdpr"]', '[id*="cookie"]',
+      '[class*="consent-banner"]', '[class*="privacy-banner"]',
+      '[class*="paywall"]', '[class*="regwall"]',
 
-      // Social widgets
+      // === SOCIAL WIDGETS ===
       '[class*="share-buttons"]', '[class*="social-share"]',
       '[class*="follow-us"]', '[class*="social-widget"]',
+      '[class*="social-bar"]', '[class*="share-bar"]',
 
-      // Floating elements
+      // === FLOATING / STICKY CLUTTER ===
       '[class*="floating-"]', '[class*="fixed-bottom"]',
       '[class*="sticky-footer"]', '[class*="bottom-bar"]',
+      '[class*="sticky-ad"]', '[class*="stickyAd"]',
+      '[class*="adhesion"]', '[class*="anchor-ad"]',
 
-      // Chat widgets
+      // === CHAT WIDGETS ===
       '[class*="chat-widget"]', '[class*="livechat"]',
       '[id*="intercom"]', '[class*="intercom"]',
       '[id*="drift"]', '[class*="helpscout"]',
+      '[class*="zendesk"]', '[id*="hubspot"]',
 
-      // Notifications
+      // === NOTIFICATIONS / PROMOS ===
       '[class*="notification-bar"]', '[class*="alert-bar"]',
-      '[class*="announcement-bar"]', '[class*="promo-bar"]'
+      '[class*="announcement-bar"]', '[class*="promo-bar"]',
+      '[class*="top-banner"]', '[class*="promo-banner"]',
+      '[class*="marketing-banner"]',
+
+      // === RIGHT RAIL / SIDEBARS (often ads) ===
+      '[class*="right-rail"]', '[class*="rightRail"]',
+      '[class*="rail-module"]',
+
+      // === "RELATED" / "RECOMMENDED" (often native ads) ===
+      '[class*="around-the-web"]', '[class*="from-the-web"]',
+      '[class*="you-may-like"]', '[class*="recommended-for-you"]',
+      '[class*="more-stories"]', '[class*="related-stories"]'
     ],
 
     // Elements to de-emphasize (fade out)
@@ -292,13 +340,48 @@
             line-height: 1.7 !important;
           }
 
+          /* Main content containers - expand to 80% */
           .site-simplifier-active article,
           .site-simplifier-active [role="main"],
-          .site-simplifier-active main {
+          .site-simplifier-active main,
+          .site-simplifier-active .site-simplifier-main-content {
             width: 80% !important;
             max-width: 80% !important;
+            min-width: 80% !important;
             margin-left: auto !important;
             margin-right: auto !important;
+            float: none !important;
+          }
+
+          /* Remove width constraints from parent containers */
+          .site-simplifier-active article > *,
+          .site-simplifier-active [role="main"] > *,
+          .site-simplifier-active main > *,
+          .site-simplifier-active .site-simplifier-main-content > * {
+            max-width: 100% !important;
+            width: auto !important;
+          }
+
+          /* Video/media containers within content should be full width of parent */
+          .site-simplifier-active article video,
+          .site-simplifier-active article iframe,
+          .site-simplifier-active article .video-container,
+          .site-simplifier-active article [class*="video"],
+          .site-simplifier-active article [class*="player"],
+          .site-simplifier-active main video,
+          .site-simplifier-active main iframe:not([src*="ad"]),
+          .site-simplifier-active main .video-container,
+          .site-simplifier-active main [class*="video"]:not([class*="ad"]),
+          .site-simplifier-active main [class*="player"] {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          /* Ensure body and html don't constrain */
+          .site-simplifier-active,
+          .site-simplifier-active body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
           }
         ` : ''}
 
@@ -513,6 +596,45 @@
       if (!this.modifiedElements.has(element)) {
         this.modifiedElements.add(element);
         element.classList.add('site-simplifier-main-content');
+
+        // Expand width by removing constraints on parent elements
+        this.expandContentWidth(element);
+      }
+    }
+
+    expandContentWidth(element) {
+      // Walk up the DOM tree and remove width constraints
+      let current = element;
+      let depth = 0;
+      const maxDepth = 10;
+
+      while (current && current !== document.body && depth < maxDepth) {
+        const style = window.getComputedStyle(current);
+        const maxWidth = style.maxWidth;
+        const width = style.width;
+
+        // If there's a constraining max-width or fixed width, override it
+        if (maxWidth && maxWidth !== 'none' && !maxWidth.includes('%')) {
+          if (!this.originalStyles.has(current)) {
+            this.originalStyles.set(current, current.getAttribute('style') || '');
+          }
+          current.style.maxWidth = '100%';
+          this.modifiedElements.add(current);
+        }
+
+        // Handle flex containers that might constrain width
+        if (style.display === 'flex' || style.display === 'grid') {
+          if (!this.originalStyles.has(current)) {
+            this.originalStyles.set(current, current.getAttribute('style') || '');
+          }
+          // Remove flex constraints that limit main content
+          current.style.flexBasis = 'auto';
+          current.style.flexGrow = '1';
+          this.modifiedElements.add(current);
+        }
+
+        current = current.parentElement;
+        depth++;
       }
     }
 
